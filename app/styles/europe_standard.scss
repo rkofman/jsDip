@@ -38,6 +38,15 @@ text {
   &.selected {stroke-width:2;}
 }
 
+// TODO(rkofman): replace with better UI; this is just a quick hack
+// to see what I'm doing while toying with the interface.
+.unit {
+  &.actionable {
+    stroke: rebeccapurple;
+    stroke-width: 2;
+  }
+}
+
 .province.actionable.hover {
   .unit { opacity: 1; }
   .l {
