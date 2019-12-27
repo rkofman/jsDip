@@ -20,13 +20,14 @@ module.exports = class OrdersList extends Views.BaseSvgView
     super
     # TODO(rkofman): we should be listening to add/remove and doing the right thing
     # for each item rather than re-rendering the entire list each time.
-    # @listenTo(@collection, 'update', @redraw)
+    @listenTo(@collection, 'update', @redraw)
     @redraw()
     return @
 
   redraw: ->
     _(@subViews).each (view) -> view.remove()
-    @subViews = @collection?.map (model) =>
+    # note: compacting only necessary until all order views are implemented.
+    @subViews = _(@collection?.map (model) =>
       if model.type() == 'hold'
         view = new Views.svgHold model: model
       if model.type() == 'move'
@@ -35,4 +36,5 @@ module.exports = class OrdersList extends Views.BaseSvgView
         view.render()
         Snap(@el).append view.el
         view
+    ).compact()
 

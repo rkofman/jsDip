@@ -102,7 +102,8 @@ module.exports = class Map extends Views.Base
       @ordersFactory.orderClasses
     )
     actionMenu.render()
-    @listenTo(actionMenu, 'select', (orderClass) -> @ordersFactory.pushOrderClass(orderClass))
+    @listenTo(actionMenu, 'select', (orderClass) ->
+      @ordersFactory.pushOrderClass(orderClass))
     actionMenu.show(e.pageX, e.pageY)
 
   ## Model events
