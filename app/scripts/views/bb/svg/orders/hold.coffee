@@ -9,9 +9,9 @@ module.exports = class Hold extends Views.BaseSvgView
 
   tagName: 'use'
   xlink: {
-    href: "#hold"
+    href: "#hold-icon"
   }
-  className: "hold"
+  className: "hold-icon"
 
   initialize: ->
     super

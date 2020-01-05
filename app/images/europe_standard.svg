@@ -19,6 +19,11 @@ Created for Diplomap (http://www.games2relax.net/diplomap/)
 <g id="sc"> <!-- colored SC -->
 	<circle r="4"/>
 </g>
+<g id="hold-icon">
+    <circle r="14" fill="none" stroke="black" stroke-width="1"/>
+    <circle r="16" fill="none" stroke="black" stroke-width="3" stroke-opacity=".4"/>
+    <circle r="18" fill="none" stroke="black" stroke-width="2"/>
+</g>
 <marker id="move" orient="auto" markerwidth="2" markerHeight="4" refX="0.1" refY="2">
     <path d="M0,0 V4 L2,2 Z" fill="black"/>
 </marker>
@@ -365,5 +370,6 @@ Created for Diplomap (http://www.games2relax.net/diplomap/)
 <g id="Orders">
     <!-- <path xmlns="http://www.w3.org/2000/svg" id="353,378" class="support" d="M353,378 Q351,438 305,412" marker-end="url(#S)"></path> -->
     <!-- <path xmlns="http://www.w3.org/2000/svg" id="353,378" class="move" d="M353,378 305,412" marker-end="url(#M)"></path> -->
+    <!-- <polygon points="0,0 1,2 3,2 4,0 3,-2 1,-2" fill="" stroke="black" transform="scale(6)"/> -->
 </g>
 </svg>
