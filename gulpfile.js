@@ -30,7 +30,7 @@ gulp.task('browserify', function () {
 gulp.task('styles', function () {
   return gulp.src('app/styles/main.scss')
     .pipe(plugins.plumber())
-    .pipe(plugins.rubySass({
+    .pipe(plugins.sass({
       style: 'expanded',
       precision: 10
     }))
