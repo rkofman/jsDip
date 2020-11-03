@@ -19,22 +19,24 @@ module.exports = class Province extends backbone.Model
   initAdjacencyLinks: ->
     vivifiedAdjacencies = {}
     for type, modelNames of @get('adjacent')
-      # type is 'A' or 'F'. Shoreline provinces will appear in both. 
+      # type is 'army' or 'fleet'. Shoreline provinces will appear in both. 
+      type = {'A': 'army', 'F': 'fleet'}[type]
       vivifiedAdjacencies[type] = @_vivifyProvinces modelNames
     @set('adjacent', vivifiedAdjacencies, silent: true)
 
   getAdjacentForArmies: ->
-    @get('adjacent')['A']
+    @get('adjacent')['army']
 
   getAdjacentForFleets: ->
-    @get('adjacent')['F']
+    @get('adjacent')['fleet']
 
   htmlId: ->
     @get('name').replace(/\s/g, "_").replace(/\(/g, "_").replace(/\)/g, "");
 
   _vivifyProvinces: (provinceNames) ->
-    _(@collection.getMany(provinceNames)).tap (subCollection) ->
-      throw "Bad data encountered." if subCollection.contains(undefined)
+    provinceModels = @collection.getMany(provinceNames)
+    throw "Bad data encountered." if provinceModels.contains(undefined)
+    provinceModels
 
   # not sure if this method is needed...
   # keeping around briefly in case it comes up.

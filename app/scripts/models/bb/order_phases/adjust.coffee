@@ -1,4 +1,4 @@
-BaseOrdersFactory = require './base'
+BaseOrdersPhase = require './base'
 
 Models = {
   Orders: {
@@ -7,7 +7,8 @@ Models = {
   }
 }
 
-module.exports = class AdjustOrdersFactory extends BaseOrdersFactory
+module.exports = class AdjustOrdersPhase extends BaseOrdersPhase
+  type: "adjust"
 
   shouldBuild: ->
     @supplyCenterSurplus > 0

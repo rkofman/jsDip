@@ -1,4 +1,4 @@
-BaseOrdersFactory = require './base'
+BaseOrdersPhase = require './base'
 
 Models = {
   Orders: {
@@ -7,7 +7,8 @@ Models = {
   }
 }
 
-module.exports = class RetreatOrdersFactory extends BaseOrdersFactory
+module.exports = class RetreatOrdersPhase extends BaseOrdersPhase
+  type: "retreat"
   actionableProvinces: ->
     @get('country').get('units').where(disloged: true).map (unit) ->
       unit.get('province')

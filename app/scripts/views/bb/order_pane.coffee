@@ -11,7 +11,7 @@ module.exports = class OrderPane extends Views.Base
     super
     
   render: ->
-    @listenTo(@model, 'change:ordersFactory', @redraw)
+    @listenTo(@model, 'change:ordersPhase', @redraw)
     @redraw()
     super
 
@@ -20,7 +20,7 @@ module.exports = class OrderPane extends Views.Base
     @collectionView = new Views.CollectionView(
       tagName: 'ul'
       className: 'order-pane'
-      collection: @model?.get('ordersFactory')?.get('orders'),
+      collection: @model?.get('ordersPhase')?.get('orders'),
       subView: Views.OrderPaneOrder)
     @collectionView.render()
     @$el.append @collectionView.el

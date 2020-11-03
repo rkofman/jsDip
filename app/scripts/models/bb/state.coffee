@@ -6,10 +6,10 @@ Collections = {
 }
 
 Models = {
-  OrderFactories: {
-    Adjust: require './order_factories/adjust.coffee'
-    Movement: require './order_factories/movement.coffee'
-    Retreat: require './order_factories/retreat.coffee'
+  OrderPhases: {
+    Adjust: require './order_phases/adjust.coffee'
+    Movement: require './order_phases/movement.coffee'
+    Retreat: require './order_phases/retreat.coffee'
   }
 }
 
@@ -38,6 +38,6 @@ module.exports = class State extends backbone.Model
   startOrderEntry: (countryName) ->
     country = @getCountry(countryName)
 
-    orderFactory = Models.OrderFactories[@get('phase')]
-    throw "Can't parse phase." unless orderFactory
-    @set('ordersFactory', new orderFactory(country: country))
+    orderPhase = Models.OrderPhases[@get('phase')]
+    throw "Can't parse phase." unless orderPhase
+    @set('ordersPhase', new orderPhase(country: country))

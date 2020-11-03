@@ -24,9 +24,7 @@ module.exports = class Provinces extends backbone.Collection
     new Provinces(provinces)
 
   getMany: (modelNames) ->
-    new Provinces(
-      _(modelNames).map (name) => @get(name)
-    )
+    _(_(modelNames).map (name) => @get(name))
 
   parseCoords: (coords) ->
     _(coords.provinces).map (coordinateString, provinceName) =>

@@ -39,8 +39,8 @@ module.exports = class Map extends Views.Base
     @initOrderEntry() # should depend on current State Machine.
 
   initOrderEntry: ->
-    @listenTo(@state, 'change:ordersFactory', @onChangedOrdersFactory)
-    @onChangedOrdersFactory(@state, @state.get('ordersFactory')) if @state.get('ordersFactory')
+    @listenTo(@state, 'change:ordersPhase', @onChangedOrdersPhase)
+    @onChangedOrdersPhase(@state, @state.get('ordersPhase')) if @state.get('ordersPhase')
 
 
   render: (svgData=null) ->
@@ -93,35 +93,35 @@ module.exports = class Map extends Views.Base
   onActionableClick: (e) ->
     provinceName = Snap(e.currentTarget).attr('data-province')
     province = @model.get('provinces').get(provinceName)
-    unless @ordersFactory.hasOrderUnderConstruction()
+    unless @ordersPhase.hasOrderUnderConstruction()
       @initOrderTypePicker(e)
-    @ordersFactory.pushProvince province # needs implementation.
+    @ordersPhase.pushProvince province # needs implementation.
 
   initOrderTypePicker: (e) ->
     actionMenu = new Views.ActionMenu(
-      @ordersFactory.orderClasses
+      @ordersPhase.orderClasses
     )
     actionMenu.render()
     @listenTo(actionMenu, 'select', (orderClass) ->
-      @ordersFactory.pushOrderClass(orderClass))
+      @ordersPhase.pushOrderClass(orderClass))
     actionMenu.show(e.pageX, e.pageY)
 
   ## Model events
-  onChangedOrdersFactory: (state, ordersFactory) ->
-    previousFactory = state.previous('ordersFactory')
-    @stopListening(previousFactory) if previousFactory
+  onChangedOrdersPhase: (state, ordersPhase) ->
+    previousPhase = state.previous('ordersPhase')
+    @stopListening(previousPhase) if previousPhase
 
-    @ordersFactory = ordersFactory
-    @listenTo(@ordersFactory, 'change:actionableProvinces', @onOrdersFactoryActionableChanged)
+    @ordersPhase = ordersPhase
+    @listenTo(@ordersPhase, 'change:actionableProvinces', @onOrdersPhaseActionableChanged)
     @updateActionableProvinces()
     @resetOrdersList()
 
   resetOrdersList: ->
     @ordersListView?.remove()
-    @ordersListView = new Views.OrdersList el: @svgOrders, collection: @ordersFactory.get('orders')
+    @ordersListView = new Views.OrdersList el: @svgOrders, collection: @ordersPhase.get('orders')
     @ordersListView.render()
 
-  onOrdersFactoryActionableChanged: ->
+  onOrdersPhaseActionableChanged: ->
     @updateActionableProvinces()
 
   onProvinceHover: (province, isHovered) ->
@@ -143,7 +143,7 @@ module.exports = class Map extends Views.Base
   updateActionableProvinces: () ->
     @removeHover()
     @removeActionable()
-    provinces = @ordersFactory.get('actionableProvinces')
+    provinces = @ordersPhase.get('actionableProvinces')
     provinces.each (province) =>
       name = province.get('name')
       Snap.selectAll("[data-province='#{name}']").forEach (svgEl) ->

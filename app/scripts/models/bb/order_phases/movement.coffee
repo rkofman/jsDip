@@ -1,5 +1,5 @@
 backbone = require 'backbone'
-BaseOrdersFactory = require './base'
+BaseOrdersPhase = require './base'
 
 OrderClasses = [
   # order of array is the order in which they will be displayed in the selector UI
@@ -9,7 +9,7 @@ OrderClasses = [
   require '../orders/convoy'
 ]
 
-module.exports = class MovementOrdersFactory extends BaseOrdersFactory
+module.exports = class MovementOrdersPhase extends BaseOrdersPhase
   orderClasses: OrderClasses
 
   initialize: (attrs, options) ->
@@ -49,6 +49,9 @@ module.exports = class MovementOrdersFactory extends BaseOrdersFactory
     @get('orders').remove(dupe)
 
 
+  # note: this seems like an unnecessary level of indirection
+  # perhaps the view should just ask for an order object to interact with
+  # and push directly to it?
   pushProvince: (province) ->
     if @orderUnderConstruction
       @orderUnderConstruction.pushProvince(province)

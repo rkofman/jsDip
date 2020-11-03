@@ -2,6 +2,7 @@ OrderBase = require './order_base'
 Models = {
   Orders: {
     Move: require './move'
+    Hold: require './hold'
   }
 }
 module.exports = class SupportOrder extends OrderBase
@@ -35,25 +36,60 @@ module.exports = class SupportOrder extends OrderBase
     @get('subOrder').targetProvinceName()
 
   unitType: () ->
-    @_unitType
+    @get('province')?.get('unit')?.get('type')[0].toUpperCase() || @_unitType
 
   toJSON: () ->
-    "#{@unitType()} #{@provinceName()} Supports #{@get('subOrder').toJSON()}"
+    if @get('subOrder')
+      "#{@unitType()} #{@provinceName()} Supports #{@get('subOrder').toJSON()}"
+    else
+      "#{@unitType()} #{@provinceName()} Supports ???"
 
   pushProvince: (province) ->
-    if !@get('subOrder')
+    if !@get('province')
       @set('province', province)
-      # WARNING: this is a bug. The UI should choose what kind of order
-      # this is going to build. Perhaps "Hold". Alternatively, can be based on 
-      # target + destination being the same -- in either case, the blow line
-      # of code is.. incorrect.
-      @set('subOrder', new Models.Orders.Move())
-      @listenTo(@get('subOrder'), 'construction:complete', @onSubOrderComplete)
+    else if !@get('source')
+      @set('source', province)
     else
-      @get('subOrder').pushProvince(province)
+      @createSubOrder(province)
+      @trigger('construction:complete')
+  
+  createSubOrder: (finalProvince) ->
+    if @get('source') == finalProvince
+      # create support sub-order
+      hold = new Models.Orders.Hold()
+      hold.pushProvince(finalProvince)
+      @set('subOrder', hold)
+    else
+      # create movement sub-order
+      move = new Models.Orders.Move()
+      move.pushProvince(@get('source'))
+      move.pushProvince(finalProvince)
+      @set('subOrder', move)
 
   validNextProvinces: ->
-    # TODO next: All provinces that have units.
+    if !@get('source') 
+      @validSupportableProvinces()
+    else
+      @validSupportDestinations()
+
+  validSupportableProvinces: ->
+    _(@unit().occupiedSphereOfInfluence().chain()
+    .map((province) -> province.get('unit'))
+    .map((unit) -> unit.sphereOfInfluence())
+    .map((underscoreWrapper) -> underscoreWrapper.value())
+    .flatten()
+    .uniq()
+    .without(@get('province'))
+    .value())
+  
+  validSupportDestinations: ->
+    _(@get('source').get('unit').sphereOfInfluence().chain()
+    .push(@get('source'))
+    .intersection(@unit().sphereOfInfluence().values())
+    .value())
+
+  unit: ->
+    @get('province').get('unit')
 
   onSubOrderComplete: ->
     @trigger('construction:complete')

@@ -8,6 +8,10 @@ module.exports = class MoveOrder extends OrderBase
     match = text.match(/([AF]) (.+?) (move|->|-) (.+)/i) # case insensitive!
     throw new Error("Can't parse order text: `#{text}`") unless match
     @_unitType = match[1]
+    # note: we should likely re-use the pushProvince method -- but it requires
+    # a full / vivified province. There should *not* be two ways to initialize this class.
+    # alternatively: we can remove the vivified classes; and make this a simple data container;
+    # which relies on a global State singleton to do its work navigating the world.
     {
       province: provinces.get(match[2])
       targetProvince: provinces.get(match[4])
@@ -44,12 +48,8 @@ module.exports = class MoveOrder extends OrderBase
       @set('province', province)
 
   validNextProvinces: ->
-    unit = @get('province').get('unit')
-    if unit.get('type') == 'army'
-      @get('province').getAdjacentForArmies()
-    else if unit.get('type') == 'fleet'
-      @get('province').getAdjacentForFleets()
-
+    # note: unit should become first order attribute. Law of Demeter.
+    @get('province').get('unit').sphereOfInfluence()
 
 module.exports.type = "move"
 module.exports.displayName = "Move"
