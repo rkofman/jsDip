@@ -14,7 +14,7 @@ module.exports = class Move extends Views.BaseSvgView
   className: "move"
 
   initialize: ->
-    super
+    super.initialize(...arguments)
 
   render: ->
     startCoords = @model.get('province').get('unitCoordinates')

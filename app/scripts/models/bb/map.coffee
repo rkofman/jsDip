@@ -2,7 +2,7 @@ backbone = require 'backbone'
 
 module.exports = class Map extends backbone.Model
   initialize: ->
-    super
+    super.initialize(...arguments)
 
   parse: (date, options) ->
-    super
+    super.parse(...arguments)

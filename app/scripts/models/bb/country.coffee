@@ -20,7 +20,7 @@ module.exports = class Country extends backbone.Model
   idAttribute: "name"
 
   parse: (data, options) ->
-    _(super).tap (attrs) =>
+    _(super.parse(...arguments)).tap (attrs) =>
       @_parseUnits(attrs, options)
       @_parseProvinces(attrs, options)
       @_parseOrders(attrs, options)

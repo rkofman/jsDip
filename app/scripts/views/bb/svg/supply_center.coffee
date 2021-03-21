@@ -13,7 +13,7 @@ module.exports = class SupplyCenter extends Views.BaseSvgView
   className: "sc"
 
   initialize: ->
-    super
+    super.initialize(...arguments)
     @listenTo(@model, 'change', @modelUpdated)
 
   render: ->

@@ -25,7 +25,7 @@ module.exports = class Map extends Views.Base
     'mouseleave .actionable': 'onActionableLeave'
 
   initialize: (options) ->
-    super
+    super.initialize(...arguments)
     @state = @model.get('state')
     @provinces = @model.get('provinces')
     Snap(@el).append options.svgData if options.svgData

@@ -32,7 +32,7 @@ module.exports = class ActionMenu extends Views.Base
       displayName: orderClass.displayName
 
   render: ->
-    super
+    super.render(...arguments)
     @$el.hide()
     @$popoverEl = @$('.orders-popout')
     @$popoverEl.css("position": "absolute");

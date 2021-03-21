@@ -12,7 +12,7 @@ module.exports = class OrderPane extends Views.Base
   }
 
   render: ->
-    super
+    super.render(...arguments)
 
   onOrderDelete: (event) ->
     event.preventDefault()

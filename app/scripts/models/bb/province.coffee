@@ -5,7 +5,7 @@ module.exports = class Province extends backbone.Model
   idAttribute: "name"
 
   initialize: (attributes, options) ->
-    super
+    super.initialize(...arguments)
 
   initSubregionLinks: ->
     return unless @get('subregions')

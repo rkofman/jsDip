@@ -8,7 +8,7 @@ module.exports = class Provinces extends backbone.Collection
   model: Models.Province
 
   set: (data, options) ->
-    ret = super
+    ret = super.set(...arguments)
     return ret unless options.parse
     @initLinks()
     @parseCoords(options.coords)

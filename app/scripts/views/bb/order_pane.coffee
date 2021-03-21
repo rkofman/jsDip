@@ -8,12 +8,12 @@ module.exports = class OrderPane extends Views.Base
   el: '#sidebar'
 
   initialize: ->
-    super
+    super.initialize(...arguments)
     
   render: ->
     @listenTo(@model, 'change:ordersPhase', @redraw)
     @redraw()
-    super
+    super.render(...arguments)
 
   redraw: ->
     @collectionView?.remove()

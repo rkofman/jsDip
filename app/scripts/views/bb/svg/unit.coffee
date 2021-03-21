@@ -18,7 +18,7 @@ module.exports = class UnitView extends Views.BaseSvgView
   #   style: "opacity: .8; fill: #f33;"
 
   initialize: (options) ->
-    super
+    super.initialize(...arguments)
     @listenTo(@model, 'change', @modelUpdated)
 
    # id: "sc#{@model.get('name')}"

@@ -5,7 +5,7 @@ SupplyCenter = require '../models/bb/supply_center'
 module.exports = class SupplyCenters extends backbone.Collection
   model: SupplyCenter
   initialize: (attrs, options) ->
-    super
+    super.initialize(...arguments)
     @provinces = options.provinces # should this be passed to here?
 
   parse: (data, options) ->

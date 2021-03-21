@@ -14,7 +14,7 @@ module.exports = class Hold extends Views.BaseSvgView
   className: "hold-icon"
 
   initialize: ->
-    super
+    super.initialize(...arguments)
 
   render: ->
     coords = @model.get('province').get('unitCoordinates')

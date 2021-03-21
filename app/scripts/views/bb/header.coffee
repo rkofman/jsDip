@@ -11,10 +11,10 @@ module.exports = class Header extends Views.Base
   }
 
   initialize: (attrs, options) ->
-    super
+    super.initialize(...arguments)
 
   render: ->
-    super
+    super.render(...arguments)
     @model.startOrderEntry("England") ## TODO: (test code! do not commit.)
 
   toJSON: ->

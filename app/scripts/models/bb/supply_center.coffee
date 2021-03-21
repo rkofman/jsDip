@@ -2,7 +2,7 @@ backbone = require 'backbone'
 
 module.exports = class SupplyCenter extends backbone.Model
   initialize: ->
-    super
+    super.initialize(...arguments)
 
   parse: (data, options) ->
     [x,y] = data.coords.split(',')

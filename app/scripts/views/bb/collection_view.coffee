@@ -9,7 +9,7 @@ module.exports = class CollectionView extends Views.Base
     @subViewConstructor = options.subView
 
   render: ->
-    super
+    super.render(...arguments)
     # TODO(rkofman): we should be listening to add/remove and doing the right thing
     # for each item rather than re-rendering the entire list each time.
     @listenTo(@collection, 'update', @redraw)
