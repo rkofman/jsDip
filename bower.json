@@ -1,7 +1,0 @@
-{
-  "name": "jsdipwebapp",
-  "private": true,
-  "dependencies": {
-    "snap.svg": "~0.3.0"
-  }
-}

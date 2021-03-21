@@ -3,7 +3,7 @@ _ = require 'underscore'
 Views = {
   Base: require './base'
 }
-template = require '../templates/action_menu.hbs'
+template = require('../templates/action_menu.hbs').default
 
 # How to use me:
 #   actionMenu = new ActionMenu(arrayOforderTypes)

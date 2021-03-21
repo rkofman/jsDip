@@ -34,7 +34,7 @@ gulp.task('styles', function () {
       style: 'expanded',
       precision: 10
     }))
-    .pipe(plugins.autoprefixer({browsers: ['last 1 version']}))
+//    .pipe(plugins.autoprefixer({browsers: ['last 1 version']}))
     .pipe(gulp.dest('tmp/styles'));
 });
 
@@ -53,7 +53,7 @@ gulp.task('jshint', function () {
 //     .pipe(gulp.dest('tmp/scripts'));
 // });
 
-gulp.task('html', ['styles', 'browserify'], function () {
+gulp.task('html', gulp.series('styles', 'browserify', function () {
   var assets = plugins.useref.assets({searchPath: '{tmp,app}'});
 
   return gulp.src('app/*.html')
@@ -64,7 +64,7 @@ gulp.task('html', ['styles', 'browserify'], function () {
     .pipe(plugins.useref())
     .pipe(plugins.if('*.html', plugins.minifyHtml({conditionals: true, loose: true})))
     .pipe(gulp.dest('dist'));
-});
+}));
 
 gulp.task('images', function () {
   return gulp.src('app/images/**/*')
@@ -94,7 +94,7 @@ gulp.task('extras', function () {
 
 gulp.task('clean', require('del').bind(null, ['tmp', 'dist']));
 
-gulp.task('connect', ['styles', 'browserify'], function () {
+gulp.task('connect', gulp.series('styles', 'browserify', function () {
   var serveStatic = require('serve-static');
   var serveIndex = require('serve-index');
   var app = require('connect')()
@@ -111,11 +111,7 @@ gulp.task('connect', ['styles', 'browserify'], function () {
     .on('listening', function () {
       console.log('Started connect web server on http://localhost:9000');
     });
-});
-
-gulp.task('serve', ['connect', 'watch'], function () {
-  require('opn')('http://localhost:9000');
-});
+}));
 
 // inject bower components
 gulp.task('wiredep', function () {
@@ -130,7 +126,7 @@ gulp.task('wiredep', function () {
     .pipe(gulp.dest('app'));
 });
 
-gulp.task('watch', ['connect'], function () {
+gulp.task('watch', gulp.series('connect', function () {
   plugins.livereload.listen();
 
   // watch for changes
@@ -145,16 +141,20 @@ gulp.task('watch', ['connect'], function () {
   gulp.watch('app/styles/**/*.scss', ['styles']);
   gulp.watch('app/scripts/**/*.coffee', ['browserify']);
   gulp.watch('bower.json', ['wiredep']);
-});
+}));
 
-gulp.task('build', ['html', 'images', 'fonts', 'extras'], function () {
+gulp.task('serve', gulp.series('connect', 'watch', function () {
+  require('opn')('http://localhost:9000');
+}));
+
+gulp.task('build', gulp.series('html', 'images', 'fonts', 'extras', function () {
 // gulp.task('build', ['jshint', 'html', 'images', 'fonts', 'extras'], function () {
   return gulp.src('dist/**/*').pipe(plugins.size({title: 'build', gzip: true}));
-});
+}));
 
-gulp.task('default', ['clean'], function () {
+gulp.task('default', gulp.series('clean', function () {
   gulp.start('build');
-});
+}));
 
 gulp.task('test', function () {
   require('coffee-script/register')

@@ -1,6 +1,6 @@
 _ = require 'underscore'
 backbone = require 'backbone'
-Snap = require 'snap.svg'
+Snap = require 'snapsvg'
 
 Views = {
   Base: require './base'

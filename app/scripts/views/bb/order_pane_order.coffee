@@ -1,7 +1,7 @@
 Views = {
   Base: require './base'
 }
-template = require('../templates/order_pane_order.hbs')
+template = require('../templates/order_pane_order.hbs').default
 
 module.exports = class OrderPane extends Views.Base
   tagName: 'li'

@@ -12,7 +12,7 @@ module.exports = class HoldOrder extends OrderBase
     }
 
   provinceName: () ->
-  	@get('province').get('name')
+    @get('province').get('name')
 
   unitType: () ->
     # TODO(rkofman): parse / serialize from tests doesn't
@@ -26,7 +26,7 @@ module.exports = class HoldOrder extends OrderBase
     @get('province')?.get('unit')?.get('type')[0].toUpperCase() || @_unitType
 
   toJSON: () ->
-  	"#{@unitType()} #{@provinceName()} Hold"
+    "#{@unitType()} #{@provinceName()} Hold"
 
   type: ->
     module.exports.type

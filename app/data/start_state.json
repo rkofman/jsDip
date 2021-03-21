@@ -1,56 +1,57 @@
-﻿{
-    "year": 1901,
-    "season": "Spring",
-    "phase": "Movement",
-    "countries": {
-        "Austria": {
-            "armies": ["Budapest", "Vienna"],
-            "fleets": ["Trieste"],
-            "provinces": ["Budapest", "Trieste", "Vienna", "Galicia", "Bohemia", "Tyrolia"],
-            "orders": []
-        },
-        "England": {
-            "armies": ["Liverpool", "Yorkshire", "Norway", "Sweden"],
-            "fleets": ["London", "Edinburgh", "North Sea"],
-            "provinces": ["Edinburgh", "Liverpool", "London", "Yorkshire", "Wales", "Clyde"],
-            "orders": [
-                "F Edinburgh -> Norwegian Sea",
-                "A Sweden -> Finland",
-                "A Norway SUPPORTS A Sweden -> Finland",
-                "A Yorkshire -> Denmark",
-                "F North Sea CONVOYS A Yorkshire -> Denmark",
-                "A Liverpool HOLD"
-            ]
-        },
-        "France": {
-            "armies": ["Paris", "Marseilles"],
-            "fleets": ["Brest"],
-            "provinces": ["Brest", "Marseilles", "Paris", "Gascony", "Burgundy", "Picardy"],
-            "orders": []
-        },
-        "Germany": {
-            "armies": ["Berlin", "Munich"],
-            "fleets": ["Kiel"],
-            "provinces": ["Berlin", "Kiel", "Munich", "Ruhr", "Prussia", "Silesia"],
-            "orders": []
-        },
-        "Italy": {
-            "armies": ["Rome", "Venice"],
-            "fleets": ["Naples"],
-            "provinces": ["Naples", "Rome", "Venice", "Piedmont", "Apulia", "Tuscany"],
-            "orders": []
-        },
-        "Russia": {
-            "armies": ["Moscow", "Warsaw"],
-            "fleets": ["St Petersburg (nc)", "Sevastopol"],
-            "provinces": ["Moscow", "Sevastopol", "St Petersburg", "Warsaw", "Ukraine", "St Petersburg", "Finland", "Livonia"],
-            "orders": []
-        },
-        "Turkey": {
-            "armies": ["Constantinople", "Smyrna"],
-            "fleets": ["Ankara"],
-            "provinces": ["Ankara", "Constantinople", "Smyrna", "Armenia", "Syria"],
-            "orders": []
-        }
-    }
+{
+	"year": 1901,
+	"season": "Spring",
+	"phase": "Movement",
+	"countries": {
+		"Austria": {
+			"armies": ["Budapest", "Vienna"],
+			"fleets": ["Trieste"],
+			"provinces": ["Budapest", "Trieste", "Vienna", "Galicia", "Bohemia", "Tyrolia"],
+			"orders": []
+		},
+		"England": {
+			"armies": ["Liverpool", "Yorkshire", "Norway", "Sweden"],
+			"fleets": ["London", "Edinburgh", "North Sea"],
+			"provinces": ["Edinburgh", "Liverpool", "London", "Yorkshire", "Wales", "Clyde"],
+			"orders": [
+				"F Edinburgh -> Norwegian Sea",
+				"A Sweden -> Finland",
+				"A Norway SUPPORTS A Sweden -> Finland",
+				"A Yorkshire -> Denmark",
+				"F North Sea CONVOYS A Yorkshire -> Denmark",
+				"A Liverpool HOLD"
+			]
+		},
+		"France": {
+			"armies": ["Paris", "Marseilles"],
+			"fleets": ["Brest"],
+			"provinces": ["Brest", "Marseilles", "Paris", "Gascony", "Burgundy", "Picardy"],
+			"orders": []
+		},
+		"Germany": {
+			"armies": ["Berlin", "Munich"],
+			"fleets": ["Kiel"],
+			"provinces": ["Berlin", "Kiel", "Munich", "Ruhr", "Prussia", "Silesia"],
+			"orders": []
+		},
+		"Italy": {
+			"armies": ["Rome", "Venice"],
+			"fleets": ["Naples"],
+			"provinces": ["Naples", "Rome", "Venice", "Piedmont", "Apulia", "Tuscany"],
+			"orders": []
+		},
+		"Russia": {
+			"armies": ["Moscow", "Warsaw"],
+			"fleets": ["St Petersburg (nc)", "Sevastopol"],
+			"provinces": ["Moscow", "Sevastopol", "St Petersburg", "Warsaw", "Ukraine", "St Petersburg", "Finland", "Livonia"],
+			"orders": []
+		},
+		"Turkey": {
+			"armies": ["Constantinople", "Smyrna"],
+			"fleets": ["Ankara"],
+			"provinces": ["Ankara", "Constantinople", "Smyrna", "Armenia", "Syria"],
+			"orders": []
+		}
+	}
 }
+

@@ -1,6 +1,6 @@
 backbone = require 'backbone'
 $ = require 'jquery'
-Snap = require 'snap.svg'
+Snap = require 'snapsvg'
 
 Collections = {
   SupplyCenters: require '../../collections/supply_centers'

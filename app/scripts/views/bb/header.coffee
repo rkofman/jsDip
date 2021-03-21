@@ -1,7 +1,7 @@
 Views = {
   Base: require './base'
 }
-template = require('../templates/header.hbs')
+template = require('../templates/header.hbs').default
 
 module.exports = class Header extends Views.Base
   el: '#header'
